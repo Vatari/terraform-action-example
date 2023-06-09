@@ -79,20 +79,16 @@ jobs:
       with:
         terraform_version: 1.1.7
         
-    # Login to Azure via Azure CLI
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init
+ 
+     # Login to Azure via Azure CLI
     - name: Login via Azure CLI
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init
-      
         
     # Terraform apply
     - name: Terraform Apply
       run: terraform apply -auto-approve
-    # Terraform validate
-    - name: Terraform validate
-      run: terraform validate
